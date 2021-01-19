@@ -1,0 +1,53 @@
+html(lang='fa')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='icon', type='image/png', sizes='32x32', href=`${staticDirUrl}/img/favicon-32x32.png`)
+    link(rel='icon', type='image/png', sizes='16x16', href=`${staticDirUrl}/img/favicon-16x16.png`)
+    meta(name='theme-color', content='#589BCF')
+    meta(name='msapplication-navbutton-color', content='#589BCF')
+    meta(name='apple-mobile-web-app-status-bar-style', content='#589BCF')
+    title #{title}
+    link(rel='stylesheet', type='text/css', href=`${staticDirUrl}/css/all.min.css`)
+    link(rel='stylesheet', type='text/css', href=`${staticDirUrl}/css/style.css?${appVersion}`)
+  body
+    #noties
+    if(!bannerPost)
+      #back
+        a(href= `${postLink}`)
+        #back-wrap
+          span#pre-text مشاهده پست
+          i.fas.fa-chevron-left
+    #wrapper
+      #comments-count
+        span #{commentsCount} کامنت
+        |  (برای ارسال پیام دوستانه به کاربران روی عکس یا اسم آنها کلیک کنید)
+      .comments
+        if commentsCount > 0
+          if(moreResultsCount > 0)
+            button#more-result مشاهده #{moreResultsCount} کامنت بیشتر
+
+          != comments
+        else
+          #no-comment
+            i.fas.fa-comment-slash
+            p هنوز کامنتی برای این پست ثبت نشده !
+      #send-comment
+        #edit-or-reply
+          p
+            span#type
+            br
+            span#content
+          i.fas.fa-times
+
+        form(action='', method='post', id='send-cmnt')
+          #form-wrap
+            #wrap-textarea
+              textarea(placeholder='متنی بنویسید ...')
+            #wrap-button
+              button(type='submit')
+                i.fas.fa-paper-plane
+    script(src=`${staticDirUrl}/js/jquery-3.5.1.min.js`)
+    script(src=`${staticDirUrl}/js/socket.io.js`)
+    script(src=`${staticDirUrl}/js/script.js?${appVersion}`)
